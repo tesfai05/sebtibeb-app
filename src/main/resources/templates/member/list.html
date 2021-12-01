@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<title>SEBTIBEB - List of Members </title>
+</head>
+<body>
+	<div class="container" layout:fragment="content" align="center">
+		<div>
+			<h2>List of Member</h2>
+		</div>
+		<hr>
+
+		<div>
+			<form th:action="@{/member/list}">
+				Filter: 
+				<input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required /> 
+					
+				&nbsp; 		
+				<input type="submit" value="Search" /> 
+					
+				&nbsp; 
+				<input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+
+			</form>
+		</div>
+		<br>
+		<div>
+			<table class="table table-striped ">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">
+						  	<a th:href="@{'/members/page/'+${currentPage}+'?keyword='+${keyword}+'&sortField=firstName&sortDirection='+${reverseSortDirection}}">First Name</a>
+						</th>
+						<th scope="col">	
+							<a th:href="@{'/members/page/'+${currentPage}+'?keyword='+${keyword}+'&sortField=middleName&sortDirection='+${reverseSortDirection}}">Middle Name</a>
+						</th>
+						<th scope="col">
+							<a th:href="@{'/members/page/'+${currentPage}+'?keyword='+${keyword}+'&sortField=lastName&sortDirection='+${reverseSortDirection}}">Last Name</a>
+						</th>
+						<th scope="col">Gender</th>
+						<th scope="col">Martial Status</th>
+						<th scope="col">Address</th>
+						<th scope="col" colspan="2">Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="member, std : ${members}">
+						<th scope="row" th:text="${std.count}"></th>
+						<td th:text="${member.firstName}"></td>
+						<td th:text="${member.middleName}"></td>
+						<td th:text="${member.lastName}"></td>
+						<td th:text="${member.gender}"></td>
+						<td th:text="${member.martialStatus}"></td>
+						<td th:text="${member.address}"></td>
+						<td><a th:href="@{'/editmember/' + ${member.memberId}}" class="btn btn-primary">Edit</a></td>
+						<td ><a th:href="@{'/deletemember/' + ${member.memberId}}" class="btn btn-danger">Delete</a></td>
+					
+					</tr>
+					<tr th:if="${memberCount < 1}">
+						<td colspan="9" style="text-align: center">Currently No
+							Member is Available</td>
+					</tr>
+
+				</tbody>
+
+			</table>
+			<hr />
+		</div>
+		<div>
+			Total : [[${totalMembers}]] - Page [[${currentPage}]] of 
+			<span>
+			   <span th:if="${totalPages<1}">1</span> 
+				<span th:unless="${totalPages<1}"> [[${totalPages}]]</span> 
+			</span> 
+			&nbsp;  &nbsp;
+			<span>
+			   <a th:if="${currentPage>1}" th:href="@{/members/page/1}+'?keyword='+${keyword}+'&sortField='+${sortField}+'&sortDirection='+${sortDirection}"> First</a> 
+				<span th:unless="${currentPage>1}"> First</span> 
+			</span>  &nbsp; &nbsp;
+			<span>
+			   <a th:if="${currentPage>1}" th:href="@{'/members/page/'+${currentPage-1}+'?keyword='+${keyword}+'&sortField='+${sortField}+'&sortDirection='+${sortDirection}}"> Previous</a> 
+				<span th:unless="${currentPage>1}"> Previous</span> 
+			</span>  &nbsp; &nbsp; 
+			
+			<span th:each="i: ${#numbers.sequence(1,totalPages)}" th:if="${totalPages!=0}"> 
+				<a th:if="${i!=currentPage}" th:href="@{'/members/page/'+ ${i}}+'?keyword='+${keyword}+'&sortField='+${sortField}+'&sortDirection='+${sortDirection}"> [[${i}]]</a> 
+				<span th:unless="${i!=currentPage}"> [[${i}]]</span> 
+				&nbsp; &nbsp;
+			</span>
+			<span th:unless="${totalPages!=0}">
+					1 &nbsp; &nbsp;
+			</span>
+			<span>
+			   <a th:if="${currentPage<totalPages}" th:href="@{'/members/page/'+${currentPage+1}+'?keyword='+${keyword}+'&sortField='+${sortField}+'&sortDirection='+${sortDirection}}"> Next</a> 
+				<span th:unless="${currentPage<totalPages}"> Next</span> 
+			</span>  &nbsp; &nbsp;
+			<span>
+			   <a th:if="${currentPage<totalPages}" th:href="@{'/members/page/'+${totalPages}+'?keyword='+${keyword}+'&sortField='+${sortField}+'&sortDirection='+${sortDirection}}"> Last</a> 
+				<span th:unless="${currentPage<totalPages}"> Last</span> 
+			</span> 
+		</div>
+	</div>
+	
+</body>
+</html>

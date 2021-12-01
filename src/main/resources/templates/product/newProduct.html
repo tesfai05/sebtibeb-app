@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+
+<title>SRM - Product Form</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<h2 style="text-align: center">Product Form</h2>
+		<hr />
+
+		<form action="#" th:action="@{/product/newProduct}"
+			th:object="${product}" method="post">
+			<input type="hidden" name="productId" th:value="${id}" />
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+					<label>Product Number </label> <input type="text"
+						class="form-control" placeholder="product number"
+						th:field="*{productNumber}"> <label style="color: red"
+						th:if="${#fields.hasErrors('productNumber')}"
+						th:errors="*{productNumber}" th:class="'error'"></label>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label>Product Name</label> <input type="text" class="form-control"
+						placeholder="Product Name" th:field="*{name}">
+				</div>
+				<div class="col-md-4 mb-3">
+					<label>Unit Price</label> <input type="text" class="form-control"
+						placeholder="0.0" th:field="*{unitPrice}"> <label
+						style="color: red" th:if="${#fields.hasErrors('unitPrice')}"
+						th:errors="*{unitPrice}" th:class="'error'"></label>
+
+				</div>
+				<div class="col-md-6 mb-3">
+					<label>Quantity In Stock</label> <input type="text"
+						class="form-control" placeholder="Quantity In Stock"
+						th:field="*{quantityInStock}"> <label style="color: red"
+						th:if="${#fields.hasErrors('quantityInStock')}"
+						th:errors="*{quantityInStock}" th:class="'error'"></label>
+				</div>
+			</div>
+			<div class="form-row">
+
+				<div class="col-md-6 mb-3">
+					<label>Date Supplied</label> <input type="text"
+						class="form-control" placeholder="yyyy-MM-dd"
+						th:field="*{dateSupplied}"> <label style="color: red"
+						th:if="${#fields.hasErrors('dateSupplied')}"
+						th:errors="*{dateSupplied}" th:class="'error'"></label>
+				</div>
+				<!-- <div class="col-md-6 mb-3">
+
+					<label>Supplied By:</label> <br /> <select th:field="*{supplier}"
+						class="form-control">
+						<option value="">Select a supplier</option>
+						<option th:each="supplier : ${suppliers}"
+							th:value="${supplier.supplierId}" th:text="${supplier.name}"></option>
+					</select>
+
+				</div> -->
+				<div class="col-md-6 mb-3">
+					<label>Supplied By:</label> <span
+						th:if="${#fields.hasErrors('supplier')}" th:errors="*{supplier}"
+						class="alert alert-danger"></span> <select name="supplier"
+						id="supplier" class="form-control" required="required">
+						<option value="">Select a supplier</option>
+						<option th:if="${product.supplier == null}"
+							th:each="supplier : ${suppliers}"
+							th:value="${supplier.supplierId}" th:text="${supplier.name}"></option>
+						<option th:if="${product.supplier != null}"
+							th:each="supplier : ${suppliers}"
+							th:value="${supplier.supplierId}" th:text="${supplier.name}"
+							th:selected="${supplier.supplierId == product.supplier.supplierId}"></option>
+					</select>
+				</div>
+
+			</div>
+
+			<!-- <input class="btn btn-primary" type="submit" value="Submit" /> <input
+				class="btn btn-primary" type="reset" value="Reset" /> -->
+
+			<div style="float: right;">
+				<button id="btnReset" type="reset" class="btn btn-outline-info"
+					style="margin-right: 2em;">Reset</button>
+				<a href="/product/list" class="btn btn-outline-warning"
+					style="margin-right: 2em;">Cancel</a>
+				<button id="btnSubmit" type="submit" class="btn btn-outline-primary">Save
+					Product</button>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

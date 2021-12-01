@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<title>SEBTIBEB - Create Account</title>
+</head>
+<body>
+	<br>
+	<br>
+	<div class="container" layout:fragment="content">
+		<div id="development" >
+			<form th:action="@{/public/create-account}" method="POST" style="margin: 0 auto;" th:object="${userAccount}">
+				<h4>SEBTIBEB - Create Account</h4>
+				
+				<div class="form-group row">
+					<div class="col-md-6 mb-3">
+						<label for="firstName" class="col-sm-4 col-form-label">First
+							Name : </label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="firstName"
+								placeholder="First Name" th:field="*{firstName}">
+							<label style="color: red" th:if="${#fields.hasErrors('firstName')}"
+								th:errors="*{firstName}" th:class="'error'">
+							</label>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="lastName" class="col-sm-4 col-form-label">Last
+							Name :</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="lastName"
+								placeholder="Last Name" th:field="*{lastName}">
+							<label style="color: red" th:if="${#fields.hasErrors('lastName')}"
+								th:errors="*{lastName}" th:class="'error'">
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<div class="col-md-6 mb-3">
+						<label for="username" class="col-sm-4 col-form-label">Username
+							:</label>
+						<div class="col-sm-6">
+							<input type="email" class="form-control" id="username"
+								placeholder="E-mail" th:field="*{username}">
+							<label style="color: red" th:if="${#fields.hasErrors('username')}"
+								th:errors="*{username}" th:class="'error'">
+							</label>
+						</div>
+					</div>
+					
+					<div class="col-md-6 mb-3">
+						<label for="password" class="col-sm-4 col-form-label">Password
+							:</label>
+						<div class="col-sm-6">
+							<input type="password" class="form-control" id="password"
+								placeholder="Password" th:field="*{password}">
+							<label style="color: red" th:if="${#fields.hasErrors('password')}"
+								th:errors="*{password}" th:class="'error'">
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="enabled" th:field="*{enabled}">
+							<label class="form-check-label" for="enabled"> Select
+								this check to enable your account</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row" align="center">
+					<div class="col-sm-6">
+						<button type="submit" class="btn btn-primary">Sign up</button>
+					</div>
+				</div>
+			</form>
+			<img alt="camera" th:src="@{/images/camera.jpg}">
+		</div>
+	</div>
+</body>
+</html>

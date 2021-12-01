@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>SRM - Product Collection</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<h2 style="text-align: center">List of Product Collection</h2>
+		<h3 th:text="${associate}"></h3>
+		<div style="display: flex;">
+			<a class="nav-link" href="/product/newProduct">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Add
+					New Product</button>
+			</a>
+		</div>
+		<div>
+			<table class="table table-striped ">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Product Number</th>
+						<th scope="col">Product Name</th>
+						<th scope="col">Unit Price</th>
+						<th scope="col">Quantity In Stock</th>
+						<th scope="col">Date Supplied</th>
+						<th scope="col">Supplied By</th>
+						<th scope="col" colspan="2">Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product, std : ${products}">
+						<th scope="row" th:text="${std.count}"></th>
+						<td th:text="${product.productNumber}"></td>
+						<td th:text="${product.name}"></td>
+						<td th:text="${product.unitPrice}"></td>
+						<td th:text="${product.quantityInStock}"></td>
+						<td th:text="${product.dateSupplied}"></td>
+						<td th:text="${product.supplier}"></td>
+						<td><a th:href="@{'/editproduct/' + ${product.productId}}">Edit</a></td>
+						<td><a th:href="@{'/deleteproduct/' + ${product.productId}}">Delete</a></td>
+					</tr>
+					<tr th:if="${productCount < 1}">
+						<td colspan="9" style="text-align: center">Currently No
+							Product is Available</td>
+					</tr>
+
+				</tbody>
+
+			</table>
+			<hr />
+		</div>
+	</div>
+</body>
+</html>

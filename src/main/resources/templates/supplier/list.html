@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>SRM - Supplier Collection</title>
+</head>
+<body>	
+	<div class="container" layout:fragment="content">
+		<h2 style="text-align: center">List of Supplier Collection</h2>
+		<h3 th:text="${associate}"></h3>
+		<div style="display: flex;">
+			<a class="nav-link" href="/supplier/newSupplier">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Add
+					New Supplier</button>
+			</a>
+		</div>
+		<div>
+			<table class="table table-striped ">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Supplier Number</th>
+						<th scope="col">Supplier Name</th>
+						<th scope="col">Contact Phone Number</th>
+						<th scope="col" colspan="2">Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="supplier, std : ${suppliers}">
+						<th scope="row" th:text="${std.count}"></th>
+						<td th:text="${supplier.supplierNumber}"></td>
+						<td th:text="${supplier.name}"></td>
+						<td th:text="${supplier.contactPhoneNumber}"></td>
+						<td><a th:href="@{'/editsupplier/' + ${supplier.supplierId}}">Edit</a></td>
+						<td><a th:href="@{'/deletesupplier/' + ${supplier.supplierId}}">Delete</a></td>
+					</tr>
+					<tr th:if="${supplierCount < 1}">
+						<td colspan="7" style="text-align: center">Currently No
+							Supplier is Available</td>
+					</tr>
+
+				</tbody>
+
+			</table>
+			<hr />
+		</div>
+	</div>
+</body>
+</html>

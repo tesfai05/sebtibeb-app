@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+
+<title>SEBTIBEB - Member Form</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<h2 style="text-align: center">Member Form</h2>
+		<hr />
+
+		<form action="#" th:action="@{/public/register}"
+			th:object="${member}" method="post">
+			<input type="hidden" name="memberId" th:value="${id}" />
+			<h5>Personal Information</h5>
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+					<label>First Name </label> <input type="text" class="form-control"
+						placeholder="First Name" th:field="*{firstName}"> <label
+						style="color: red" th:if="${#fields.hasErrors('firstName')}"
+						th:errors="*{firstName}" th:class="'error'"></label>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label>Middle Name </label> <input type="text" class="form-control"
+						placeholder="Middle Name" th:field="*{middleName}"> <label
+						style="color: red" th:if="${#fields.hasErrors('middleName')}"
+						th:errors="*{middleName}" th:class="'error'"></label>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label>Last Name </label> <input type="text" class="form-control"
+						placeholder="Last Name" th:field="*{lastName}"> <label
+						style="color: red" th:if="${#fields.hasErrors('lastName')}"
+						th:errors="*{lastName}" th:class="'error'"></label>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+					<label>Gender</label>
+					<div class="custom-control custom-radio ">
+						<input type="radio" id="male" name="male"
+							class="custom-control-input" value="Male" th:field="*{gender}">
+						<label class="custom-control-label" for="male">Male</label>
+					</div>
+					<div class="custom-control custom-radio ">
+						<input type="radio" id="female" name="female"
+							class="custom-control-input" value="Female" th:field="*{gender}">
+						<label class="custom-control-label" for="female">Female</label>
+					</div>
+				</div>
+
+				<div class="col-md-5 mb-3">
+					<label>Date of Birth</label> <input type="text"
+						class="form-control" placeholder="yyyy-mm-dd"
+						th:field="*{dateOfBirth}"> <label style="color: red"
+						th:if="${#fields.hasErrors('dateOfBirth')}"
+						th:errors="*{dateOfBirth}" th:class="'error'"></label>
+				</div>
+
+				<div class="col-md-3 mb-3">
+					<label>Martial Status</label>
+					<div class="custom-control custom-radio ">
+						<input type="radio" id="married" name="married"
+							class="custom-control-input" value="Married"
+							th:field="*{martialStatus}"> <label
+							class="custom-control-label" for="married">Married</label>
+					</div>
+					<div class="custom-control custom-radio ">
+						<input type="radio" id="single" name="single"
+							class="custom-control-input" value="Single"
+							th:field="*{martialStatus}"> <label
+							class="custom-control-label" for="single">Single</label>
+					</div>
+					<div class="custom-control custom-radio ">
+						<input type="radio" id="divorced" name="divorced"
+							class="custom-control-input" value="Divorced"
+							th:field="*{martialStatus}"> <label
+							class="custom-control-label" for="divorced">Divorced</label>
+					</div>
+				</div>
+			</div>
+
+			<h5>Address Information</h5>
+
+			<div class="form-row">
+				<div class="col-md-5 mb-3">
+					<label>Street </label> <input type="text" class="form-control"
+						placeholder="street" th:field="*{address.street}"> <label
+						style="color: red" th:if="${#fields.hasErrors('address.street')}"
+						th:errors="*{address.street}" th:class="'error'"></label>
+				</div>
+
+				<div class="col-md-2 mb-3">
+					<label>Apt/Suite </label> <input type="text" class="form-control"
+						placeholder="apt/suite" th:field="*{address.apt}">
+				</div>
+				<div class="col-md-5 mb-3">
+					<label>City </label> <input type="text" class="form-control"
+						placeholder="city" th:field="*{address.city}"> <label
+						style="color: red" th:if="${#fields.hasErrors('address.city')}"
+						th:errors="*{address.city}" th:class="'error'"></label>
+				</div>
+			</div>
+			<div class="form-row">
+			    <div class="col-md-3 mb-3">
+					<label>State </label> 
+					<input type="text" class="form-control"
+						placeholder="state" th:field="*{address.state}"> <label
+						style="color: red" th:if="${#fields.hasErrors('address.state')}"
+						th:errors="*{address.state}" th:class="'error'"></label>
+				</div>
+			
+				<!-- <div class="col-md-3 mb-3">
+					<label>State </label> 
+					<select name="state" id="state"
+						class="form-control">
+						<option value="">Select a state</option>
+						<option 
+							th:each="state : ${states}" 
+							th:value="${state}"
+							th:text="${state}">
+						</option>
+						
+					</select> 
+					<label style="color: red"
+						th:if="${#fields.hasErrors('address.state')}"
+						th:errors="*{address.state}" th:class="'error'"> 
+					</label>
+				</div> -->
+
+				<!-- <div class="col-md-3 mb-3">
+					<label>State </label> 
+					<select name="state" id="state" class="form-control" >
+						<option value="">Select a state</option>
+						<option 
+							th:if="${member.address.state == null}"
+							th:each="state : ${states}" 
+							th:value="${state}"
+							th:text="${state}">
+						</option>
+						<option 
+							th:if="${member.address.state != null}"
+							th:each="state : ${states}" 
+							th:value="${state}"
+							th:text="${state}"
+							th:selected="${state == member.address.state}">>
+						</option>
+					</select>
+					<label style="color: red"
+						th:if="${#fields.hasErrors('address.state')}"
+						th:errors="*{address.state}" th:class="'error'"> 
+					</label>
+				</div> -->
+
+				<div class="col-md-4 mb-3">
+					<label>Zip code (Postal code) </label> <input type="text" class="form-control"
+						placeholder="zipcode" th:field="*{address.zipcode}"> <label
+						style="color: red" th:if="${#fields.hasErrors('address.zipcode')}"
+						th:errors="*{address.zipcode}" th:class="'error'"></label>
+				</div>
+				<div class="col-md-5 mb-3">
+					<label>Country</label> <input type="text" class="form-control"
+						placeholder="country" th:field="*{address.country}"> <label
+						style="color: red" th:if="${#fields.hasErrors('address.country')}"
+						th:errors="*{address.country}" th:class="'error'"></label>
+				</div>
+			</div>
+
+			<h5>Account Information</h5>
+
+			<div class="form-row">
+				<div class="col-md-5 mb-3">
+					<label for="username">Username :</label> <input type="email"
+						class="form-control" id="username" placeholder="E-mail"
+						th:field="*{username}"> <label style="color: red"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+						th:class="'error'"> </label>
+				</div>
+
+				<div class="col-md-5 mb-3">
+					<label for="password">Password :</label> <input type="password"
+						class="form-control" id="password" placeholder="Password"
+						th:field="*{password}"> <label style="color: red"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+						th:class="'error'"> </label>
+				</div>
+			</div>
+
+			<div style="float: right;">
+				<button id="btnReset" type="reset" class="btn btn-outline-info"
+					style="margin-right: 2em;">Reset</button>
+				<a href="/member/list" class="btn btn-outline-warning"
+					style="margin-right: 2em;">Cancel</a>
+				<button id="btnSubmit" type="submit" class="btn btn-outline-primary">Save
+					Member</button>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

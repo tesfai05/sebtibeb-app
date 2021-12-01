@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>SEBTIBEB - System error</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<div id="development">
+			<h4>Sorry, No member is found with the given ID !!!</h4>
+			<p th:text="${msg}"></p>
+			<br> 
+			<img alt="camera" th:src="@{/images/camera.jpg}">
+		</div>
+	</div>
+</body>
+</html>

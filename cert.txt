@@ -1,0 +1,34 @@
+
+============ Generate certificate ==========
+keytool -genkey -alias family-app -storetype JKS -keyalg RSA -keysize 2048 -validity 365 -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home/jre/lib/security/family-app.jks
+keytool -genkey -alias family-app -storetype JKS -keyalg RSA -keysize 2048 -validity 365 -keystore family-app.jks
+  
+  
+  
+        
+============ import certificate ==========
+keytool -import -noprompt -trustcacerts  -alias <family-app> -file <location of your certificate>  -keystore <family-app.jks> -storepass <password>
+    
+    
+    
+        
+ =========== new password ============       
+ keytool -storepasswd -new %newpassword% -keystore %YourKeyStore%.jks
+        
+        
+        
+        
+=========== Delete certificate ============
+keytool -delete  -alias family-app  -keystore %JAVA_HOME%/jre/lib/security/cacerts  -storepass <password>
+keytool -delete  -alias family-app  -keystore family-app.jks  -storepass password
+
+
+===========
+Warning:
+	The JKS keystore uses a proprietary format. 
+	It is recommended to migrate to PKCS12 which is an industry standard format using 
+
+keytool -importkeystore 
+        -srckeystore family-app.jks 
+        -destkeystore family-app.jks 
+        -deststoretype pkcs12

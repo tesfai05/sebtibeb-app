@@ -1,0 +1,27 @@
+
+			<!-- <ul class="navbar-nav mr-auto">
+				th:if="${member.isMemberLoggedin}"
+				<li class="nav-item" th:if="${user==null}"><a class="nav-link"
+					href="/under-construction2">Login </a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="/under-construction2">Logout</a></li>
+			</ul> -->
+			
+			<!-- <form id="searchBookForm" method="get" action="/under-construction">
+				<div style="margin-top: 1em;" class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control mr-sm-2" id="txt"
+								name="txt" placeholder="search" th:value="${txt}" autofocus
+								required />
+							<div class="input-group-append">
+								<button id="btnSubmit" type="submit"
+									class="btn btn-secondary my-2 my-sm-0">Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form> --> 
+			
+			

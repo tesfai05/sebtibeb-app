@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+
+<title>SRM - Supplier Form</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<h2 style="text-align: center">Supplier Form</h2>
+		<hr />
+
+		<form action="#" th:action="@{/supplier/newSupplier}"
+			th:object="${supplier}" method="post">
+			<input type="hidden" name="supplierId" th:value="${id}" />
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+					<label>Supplier Number </label> <input type="text"
+						class="form-control" placeholder="supplier Number"
+						th:field="*{supplierNumber}"> <label style="color: red"
+						th:if="${#fields.hasErrors('supplierNumber')}"
+						th:errors="*{supplierNumber}" th:class="'error'"></label>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label>Supplier Name</label> <input type="text"
+						class="form-control" placeholder="Supplier Name"
+						th:field="*{name}">
+				</div>
+
+			</div>
+			<div class="form-row">
+				<div class="col-md-4 mb-3">
+					<label>Contact Phone Number</label> <input type="text"
+						class="form-control" placeholder="Contact Phone Number"
+						th:field="*{contactPhoneNumber}"> <label
+						style="color: red"
+						th:if="${#fields.hasErrors('contactPhoneNumber')}"
+						th:errors="*{contactPhoneNumber}" th:class="'error'"></label>
+
+				</div>
+			</div>
+
+			<div style="float: right;">
+				<button id="btnReset" type="reset" class="btn btn-outline-info"
+					style="margin-right: 2em;">Reset</button>
+				<a href="/product/list" class="btn btn-outline-warning"
+					style="margin-right: 2em;">Cancel</a>
+				<button id="btnSubmit" type="submit" class="btn btn-outline-primary">Save
+					Product</button>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main-layout}">
+<head>
+<title>SEBTIBEB - Member profile</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+
+		<div id="development" style="margin:0 auto;">
+			<h4>SEBTIBEB : Member profile</h4>
+			<p>Username : [[${profile.username}]]</p>
+			<p>Role : [[${profile.role}]]</p>
+			<p>Account enabled : [[${profile.enabled}]]</p>
+			<br> 
+			<img alt="camera" th:src="@{/images/camera.jpg}">
+		</div>
+	</div>
+
+</body>
+</html>
